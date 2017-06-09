@@ -3,4 +3,31 @@
     <color name="line">#ccc</color>
     <color name="white">#fff</color>
     <color name="gray">#D9D9D9</color>
+
+    <color name="main_color">#ff00baff</color>
+    <!-- 聊天界面按住说话按钮 按下状态颜色 -->
+    <color name="btn_chat_record_pre">#ffe9e7e5</color>
+    <!-- 聊天界面按住说话按钮 正常状态颜色 -->
+    <color name="btn_chat_record_nor">#ffffffff</color>
+    <!-- 聊天界面发送按钮颜色  -->
+    <color name="btn_chat_send_nor">#ff17f05a</color>
+    <!-- 聊天界面发送按钮按下状态颜色 -->
+    <color name="btn_chat_send_pre">#ff13d74f</color>
+    <!-- 聊天界面发送按钮失效状态颜色 -->
+    <color name="btn_chat_send_dis">#ff65fa93</color>
+    <color name="text_black_hint">#42000000</color>
+    <color name="edit_cursor_chat">#ff555555</color>
+    <color name="trans_more_black">#10000000</color>
+
+
+    <!--表情键盘相关-->
+    <color name="reply_button_disable">#f5f5f5</color>
+    <color name="reply_button_text">#dfFFFFFF</color>
+    <color name="reply_button_text_disable">#b8b8b8</color>
+    <color name="text_primary">#df000000</color>
+    <color name="bg_horizontal_line_color">#80a3a4a7</color>
+    <color name="bg_horizontal_btn_normal">#eeeeee</color>
+    <color name="bg_horizontal_btn_selected">#70a3a4a7</color>
+    <color name="bg_indicator_point_normal">#D8D8D8</color>
+    <color name="bg_indicator_point_selected">#A6A6A6</color>
 </resources>

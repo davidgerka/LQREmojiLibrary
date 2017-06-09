@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="btn_height_big">50dp</dimen>
+    <dimen name="padding_msmall">6dp</dimen>
+    <dimen name="btn_height_small">36dp</dimen>
+    <dimen name="margin_top_small">10dp</dimen>
+    <dimen name="margin_top_mid">16dp</dimen>
+    <dimen name="margin_top_big">20dp</dimen>
+    <dimen name="shortbtn_radius">6dp</dimen>
+    <dimen name="font_size_text_big">18dp</dimen><!-- 大字正文 -->
+    <dimen name="font_size_text_normal">16dp</dimen><!-- 正文 -->
+
+
+</resources>
