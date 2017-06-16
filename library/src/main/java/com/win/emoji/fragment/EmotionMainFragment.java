@@ -382,7 +382,7 @@ public class EmotionMainFragment extends BaseFragment implements OnEmotionClickL
      */
     public void talkViewInit() {
         recordTv.setText(R.string.record_press_start);
-        recordTv.setBackgroundResource(R.drawable.rectangle_talk0);
+        recordTv.setBackgroundResource(R.drawable.chatscene_record_nor);
     }
 
     /**
@@ -390,7 +390,7 @@ public class EmotionMainFragment extends BaseFragment implements OnEmotionClickL
      */
     public void talkViewFreeFinish() {
         recordTv.setText(R.string.record_free_finish);
-        recordTv.setBackgroundResource(R.drawable.rectangle_talk1);
+        recordTv.setBackgroundResource(R.drawable.chatscene_record_pre);
     }
 
     /**
@@ -398,7 +398,7 @@ public class EmotionMainFragment extends BaseFragment implements OnEmotionClickL
      */
     public void talkViewFreeCancel() {
         recordTv.setText(R.string.record_free_cancel);
-        recordTv.setBackgroundResource(R.drawable.rectangle_talk1);
+        recordTv.setBackgroundResource(R.drawable.chatscene_record_pre);
     }
 
     public void hideAllKeyboard(){

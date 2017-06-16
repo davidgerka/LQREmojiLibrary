@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="attr_white" format="reference|color" />
+
+    <attr name="attr_black_333333" format="reference" />
+    <attr name="attr_black_gray_666666" format="reference" />
+    <attr name="attr_gray_999999" format="reference" />
+
+</resources>

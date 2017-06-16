@@ -16,6 +16,10 @@ public class ImageModel {
     public static final int STATE_ZERO = 0;
     public static final int STATE_ONE = 1;
 
+    public ImageModel(){
+
+    }
+
     public ImageModel(String flag, Drawable icon, boolean isSelected, int state){
         this.flag = flag;
         this.icon = icon;

@@ -20,5 +20,7 @@ public class App extends Application {
                 Glide.with(context).load(path).centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
             }
         });
+
+
     }
 }

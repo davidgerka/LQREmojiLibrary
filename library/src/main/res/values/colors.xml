@@ -5,17 +5,16 @@
     <color name="gray">#D9D9D9</color>
 
     <color name="main_color">#ff00baff</color>
-    <!-- 聊天界面按住说话按钮 按下状态颜色 -->
-    <color name="btn_chat_record_pre">#ffe9e7e5</color>
-    <!-- 聊天界面按住说话按钮 正常状态颜色 -->
-    <color name="btn_chat_record_nor">#ffffffff</color>
-    <!-- 聊天界面发送按钮颜色  -->
-    <color name="btn_chat_send_nor">#ff17f05a</color>
-    <!-- 聊天界面发送按钮按下状态颜色 -->
-    <color name="btn_chat_send_pre">#ff13d74f</color>
-    <!-- 聊天界面发送按钮失效状态颜色 -->
-    <color name="btn_chat_send_dis">#ff65fa93</color>
-    <color name="text_black_hint">#42000000</color>
+
+    <color name="btn_chat_border">#d9d9d9</color>
+
+    <color name="btn_chat_record_nor">#E3E3E3</color><!-- 聊天界面按住说话按钮 正常状态颜色 -->
+    <color name="btn_chat_record_pre">#e9e7e5</color><!-- 聊天界面按住说话按钮 按下状态颜色 -->
+    <color name="btn_chat_send_nor">#5090F1</color><!-- 聊天界面发送按钮颜色  -->
+    <color name="btn_chat_send_textcolor">#ffffff</color>
+    <color name="btn_chat_send_pre">#366cb6</color><!-- 聊天界面发送按钮按下状态颜色 -->
+    <color name="btn_chat_send_dis">#999999</color><!-- 聊天界面发送按钮失效状态颜色 -->
+    <color name="text_black_hint">#666666</color>
     <color name="edit_cursor_chat">#ff555555</color>
     <color name="trans_more_black">#10000000</color>
 

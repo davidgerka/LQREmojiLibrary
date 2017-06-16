@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="theme_default" parent="@style/AppTheme">
+
+        <item name="attr_white">@color/white</item>
+        <item name="attr_black_333333">@color/black_333333</item>
+        <item name="attr_black_gray_666666">@color/black_gray_666666</item>
+        <item name="attr_gray_999999">@color/gray_999999</item>
+    </style>
+</resources>

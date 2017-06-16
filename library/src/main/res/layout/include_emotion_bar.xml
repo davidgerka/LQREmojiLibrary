@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margin_top_big"
             android:layout_marginRight="@dimen/margin_top_big"
-            android:background="@drawable/rectangle_talk0"
+            android:background="@drawable/chatscene_record_nor"
             android:gravity="center"
             android:text="@string/record_press_start"
             android:textColor="@color/text_black_hint"
@@ -63,7 +63,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_top_mid"
-            android:background="@drawable/btn_chat_send_sel"
+            android:background="@drawable/chatscene_btn_send_sel"
             android:gravity="center"
             android:text="@string/send"
             android:visibility="invisible" />
@@ -86,14 +86,14 @@
             android:layout_marginRight="@dimen/margin_top_small"
             android:layout_toLeftOf="@id/btn3"
             android:layout_toRightOf="@id/btn1"
-            android:background="@drawable/rectangle_talk0"
+            android:background="@drawable/chatscene_record_nor"
             android:cursorVisible="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:maxLines="5"
             android:minHeight="@dimen/btn_height_small"
             android:padding="@dimen/padding_msmall"
-            android:textCursorDrawable="@drawable/cursor_drawable_blue"
+            android:textCursorDrawable="@drawable/chatscene_edittext_cursor"
             android:textSize="@dimen/font_size_text_normal" />
 
         <Button
@@ -111,7 +111,7 @@
             android:layout_alignBottom="@id/et_input"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_top_mid"
-            android:background="@drawable/btn_chat_send_sel"
+            android:background="@drawable/chatscene_btn_send_sel"
             android:gravity="center"
             android:text="@string/send" />
 

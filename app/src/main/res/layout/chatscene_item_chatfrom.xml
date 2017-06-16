@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_chatfrom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/chatscene_item_padding_left"
+    android:paddingLeft="@dimen/chatscene_item_padding_left"
+    android:paddingRight="@dimen/chatscene_item_padding_left">
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/chatscene_item_time_textview"
+        android:layout_marginTop="@dimen/chatscene_item_time_marginTop"
+        android:text="星期三 14:05"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="星期三 14:05" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_avatar"
+        android:layout_width="@dimen/chatscene_item_avatar_width"
+        android:layout_height="@dimen/chatscene_item_avatar_width"
+        android:layout_marginTop="@dimen/chatscene_item_avatar_marginTop"
+        android:src="@drawable/icon_guess"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_time" />
+
+    <TextView
+        android:id="@+id/tv_master"
+        style="@style/chatscene_item_master_textview"
+        android:layout_marginLeft="@dimen/chatscene_item_master_marginLeft"
+        android:layout_marginTop="@dimen/chatscene_item_master_marginTop"
+        android:text="@string/group_master"
+        app:layout_constraintLeft_toRightOf="@id/civ_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_time"
+        tools:text="@string/group_master" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/chatscene_item_name_textview"
+        android:layout_marginLeft="@dimen/chatscene_item_name_marginLeft"
+        android:layout_marginTop="@dimen/chatscene_item_name_marginTop"
+        android:text="天下008"
+        app:layout_constraintLeft_toRightOf="@id/tv_master"
+        app:layout_constraintTop_toBottomOf="@id/tv_time"
+        app:layout_goneMarginLeft="@dimen/chatscene_item_name_gonemarginLeft"
+        tools:text="天下008" />
+
+    <TextView
+        android:id="@+id/tv_action"
+        style="@style/chatscene_item_action_textview"
+        android:layout_marginLeft="@dimen/chatscene_item_action_marginLeft"
+        android:layout_marginTop="@dimen/chatscene_item_action_marginTop"
+        android:text="参与了模拟记分"
+        app:layout_constraintLeft_toRightOf="@id/tv_name"
+        app:layout_constraintTop_toTopOf="@id/tv_name"
+        tools:text="参与了模拟记分" />
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/chatscene_item_content_layout_marginLeft"
+        android:layout_marginTop="@dimen/chatscene_item_content_layout_marginTop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/civ_avatar">
+
+        <include layout="@layout/chatscene_item_content_text_from" />
+
+        <include layout="@layout/chatscene_item_content_record_from" />
+
+        <include layout="@layout/chatscene_item_content_pic_from" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_record_time"
+        style="@style/chatscene_item_record_time_textview"
+        android:layout_marginLeft="@dimen/chatscene_item_record_time_margin_bg"
+        android:text="15 '"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/fl_content"
+        app:layout_constraintLeft_toRightOf="@id/fl_content"
+        app:layout_constraintTop_toTopOf="@id/fl_content"
+        tools:text="15'" />
+
+    <ImageView
+        android:id="@+id/iv_unread"
+        style="@style/cornerSignView"
+        android:layout_marginLeft="@dimen/chatscene_item_unread_margin_bg"
+        app:layout_constraintLeft_toRightOf="@id/fl_content"
+        app:layout_constraintTop_toTopOf="@id/fl_content" />
+
+    <ImageView
+        android:id="@+id/iv_fail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/chatscene_item_fail_margin_bg"
+        android:clickable="true"
+        android:src="@drawable/chatscene_chat_fail_sel"
+        app:layout_constraintBottom_toBottomOf="@id/fl_content"
+        app:layout_constraintLeft_toRightOf="@id/fl_content"
+        app:layout_constraintTop_toTopOf="@id/fl_content" />
+
+    <com.github.jdsjlzx.progressindicator.AVLoadingIndicatorView
+        android:id="@+id/progressbar"
+        style="@style/chatscene_item_progressbar"
+        android:layout_marginLeft="@dimen/chatscene_item_progressbar_margin_bg"
+        app:layout_constraintBottom_toBottomOf="@id/fl_content"
+        app:layout_constraintLeft_toRightOf="@id/fl_content"
+        app:layout_constraintTop_toTopOf="@id/fl_content" />
+
+</android.support.constraint.ConstraintLayout>

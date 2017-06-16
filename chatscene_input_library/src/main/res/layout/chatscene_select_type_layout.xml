@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="38dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:id="@+id/llContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_record"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/btn_chatscene_record" />
+
+            <ImageView
+                android:id="@+id/iv_word"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/btn_chatscene_keybord"
+                android:visibility="invisible" />
+
+        </FrameLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_picture"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/btn_chatscene_picture" />
+
+        <ImageView
+            android:id="@+id/iv_emoji"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/btn_chatscene_emoji" />
+
+    </LinearLayout>
+</HorizontalScrollView>
+
+

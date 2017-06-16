@@ -10,6 +10,12 @@
     tools:context="com.lqr.MainActivity">
 
     <Button
+        android:id="@+id/btnTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST"/>
+
+    <Button
         android:id="@+id/btnSimple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,5 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="仿微信聊天界面"/>
+
+    <Button
+        android:id="@+id/btnChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="聊天界面"/>
 
 </LinearLayout>

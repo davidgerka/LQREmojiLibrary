@@ -7,4 +7,10 @@
     <string name="location">位置</string>
     <string name="red_pack">红包</string>
     <string name="album">相册</string>
+
+
+
+    <!--聊天界面-->
+    <string name="group_master">群主</string>
+    <string name="play_record_fail">没找到录音文件</string>
 </resources>

@@ -2,4 +2,42 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <!--聊天界面-->
+    <dimen name="chatscene_item_text_small">9dp</dimen>
+    <dimen name="chatscene_item_text_middle">12dp</dimen>
+    <dimen name="chatscene_item_text_big">14dp</dimen>
+    <dimen name="chatscene_item_avatar_width">30dp</dimen>
+
+    <dimen name="chatscene_item_padding_left">10dp</dimen>
+    <dimen name="chatscene_item_time_marginTop">10dp</dimen>
+    <dimen name="chatscene_item_avatar_marginTop">12dp</dimen>
+    <dimen name="chatscene_item_master_marginTop">11dp</dimen>
+    <dimen name="chatscene_item_master_marginLeft">5dp</dimen>
+    <dimen name="chatscene_item_name_marginTop">9dp</dimen>
+    <dimen name="chatscene_item_name_marginLeft">4dp</dimen>
+    <dimen name="chatscene_item_name_gonemarginLeft">6dp</dimen>
+    <dimen name="chatscene_item_action_marginTop">0dp</dimen>
+    <dimen name="chatscene_item_action_marginLeft">8dp</dimen>
+    <dimen name="chatscene_item_content_layout_marginTop">19dp</dimen>
+    <dimen name="chatscene_item_content_layout_marginLeft">29dp</dimen>
+    <dimen name="chatscene_item_content_record_min_width">60dp</dimen>
+    <dimen name="chatscene_item_content_text_min_width">26dp</dimen>
+    <dimen name="chatscene_item_content_min_height">31dp</dimen>
+    <dimen name="chatscene_item_horn_margin_bg">8dp</dimen>
+    <dimen name="chatscene_item_record_time_margin_bg">4dp</dimen>
+    <dimen name="chatscene_item_unread_margin_bg">4dp</dimen>
+    <dimen name="chatscene_item_fail_margin_bg">4dp</dimen>
+    <dimen name="chatscene_item_progressbar_margin_bg">4dp</dimen>
+    <dimen name="chatscene_item_pic_min_width">80dp</dimen>
+    <dimen name="chatscene_item_pic_min_height">100dp</dimen>
+    <dimen name="chatscene_item_pic_max_width">180dp</dimen>
+    <dimen name="chatscene_item_pic_max_height">180dp</dimen>
+    <dimen name="chatscene_item_pic_angle">4dp</dimen><!--图片圆角-->
+    <dimen name="chatscene_item_pic_arrow_top">11dp</dimen><!--箭头离图片顶端的距离-->
+    <dimen name="chatscene_item_pic_arrow_offset">-5dp</dimen><!--箭头顶端与箭头尖尖处的垂直距离-->
+    <dimen name="chatscene_item_pic_arrow_height">10dp</dimen><!--箭头高度-->
+    <dimen name="chatscene_item_pic_arrow_width">6dp</dimen><!--箭头宽度-->
+
 </resources>

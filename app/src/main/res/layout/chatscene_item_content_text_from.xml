@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_layout_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/chatscene_item_bg_from_sel"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/tv_content_text"
+        style="@style/chatscene_item_content_text"
+        android:text="1234234近日" />
+
+</LinearLayout>

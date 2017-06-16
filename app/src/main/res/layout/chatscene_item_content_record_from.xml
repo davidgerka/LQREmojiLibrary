@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_layout_record"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/chatscene_item_bg_from_sel"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:minWidth="@dimen/chatscene_item_content_record_min_width">
+
+    <ImageView
+        android:id="@+id/iv_horn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/chatscene_item_horn_margin_bg"
+        android:src="@drawable/chatscene_horn_from_sel" />
+</LinearLayout>

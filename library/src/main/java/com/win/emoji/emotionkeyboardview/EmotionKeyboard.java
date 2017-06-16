@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 
-
 /**
  * author : zejian
  * time : 2016年1月5日 上午11:14:27
@@ -29,7 +28,8 @@ public class EmotionKeyboard {
     private static final String SHARE_PREFERENCE_NAME = "EmotionKeyboard";
     private static final String SHARE_PREFERENCE_SOFT_INPUT_HEIGHT = "soft_input_height";
     private static final int KEYBOARD_HEIGHT_MIN = 300; //定义一个键盘最小高度值
-
+    public static final int KEYBOARD_DEFAULT_HEIGHT = 268; //默认键盘高度值
+    private static int keyboardDefaultHeight; //默认键盘高度值
     private Activity mActivity;
     private InputMethodManager mInputManager;//软键盘管理类
     private SharedPreferences sp;
@@ -56,7 +56,83 @@ public class EmotionKeyboard {
         emotionInputDetector.mActivity = activity;
         emotionInputDetector.mInputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         emotionInputDetector.sp = activity.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        keyboardDefaultHeight = (int) (activity.getResources().getDisplayMetrics().density * KEYBOARD_DEFAULT_HEIGHT + 0.5f);
         return emotionInputDetector;
+    }
+
+    /**
+     * 获取软件盘的高度
+     *
+     * @return
+     */
+    public static int getSupportSoftInputHeight(Activity activity) {
+        Rect r = new Rect();
+        /**
+         * decorView是window中的最顶层view，可以从window中通过getDecorView获取到decorView。
+         * 通过decorView获取到程序显示的区域，包括标题栏，但不包括状态栏。
+         */
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+        //获取屏幕的高度
+        int screenHeight = activity.getWindow().getDecorView().getRootView().getHeight();
+        if (Build.VERSION.SDK_INT >= 17) {
+            DisplayMetrics metrics = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+            screenHeight = metrics.heightPixels;
+        }
+        //计算软件盘的高度
+        int softInputHeight = screenHeight - r.bottom;
+
+        /**
+         * 某些Android版本下，没有显示软键盘时减出来的高度总是144，而不是零，
+         * 这是因为高度是包括了虚拟按键栏的(例如华为系列)，所以在API Level高于20时，
+         * 我们需要减去底部虚拟按键栏的高度（如果有的话）
+         */
+        if (Build.VERSION.SDK_INT >= 17) {
+            // When SDK Level >= 20 (Android L), the softInputHeight will contain the height of softButtonsBar (if has)
+            int k = getSoftButtonsBarHeight(activity);
+            softInputHeight = softInputHeight - getSoftButtonsBarHeight(activity);
+        }
+
+        if (softInputHeight < 0) {
+            Log.w("", "EmotionKeyboard--Warning: value of softInputHeight is below zero!");
+        }
+        //存一份到本地
+        if (softInputHeight > KEYBOARD_HEIGHT_MIN) {
+            SharedPreferences sp = activity.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
+            sp.edit().putInt(SHARE_PREFERENCE_SOFT_INPUT_HEIGHT, softInputHeight).apply();
+        }
+        return softInputHeight;
+    }
+
+    /**
+     * 底部虚拟按键栏的高度
+     *
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static int getSoftButtonsBarHeight(Activity activity) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        //这个方法获取可能不是真实屏幕的高度
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int usableHeight = metrics.heightPixels;
+        //获取当前屏幕的真实高度
+        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        int realHeight = metrics.heightPixels;
+        if (realHeight > usableHeight) {
+            return realHeight - usableHeight;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * 获取保存好的软键盘高度
+     *
+     * @return
+     */
+    public static int getKeyBoardHeight(Activity activity) {
+        SharedPreferences sp = activity.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        return sp.getInt(SHARE_PREFERENCE_SOFT_INPUT_HEIGHT, 0);
     }
 
     /**
@@ -82,8 +158,8 @@ public class EmotionKeyboard {
         mWordInputEt.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP){
-                    if(mEmotionLayout.isShown()){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (mEmotionLayout.isShown()) {
                         lockContentHeight();//显示软件盘时，锁定内容高度，防止跳闪。
                         hideEmotionLayout(true);//隐藏表情布局，显示软件盘
                         //软件盘显示后，释放内容高度
@@ -95,7 +171,7 @@ public class EmotionKeyboard {
                         }, 200L);
                     }
                     mWordInputEt.setCursorVisible(true);
-                    if(mListener != null){
+                    if (mListener != null) {
                         mListener.onShowInputMethod();
                     }
                 }
@@ -116,7 +192,7 @@ public class EmotionKeyboard {
             @Override
             public void onClick(View v) {
                 showSoftInput();
-                if(mListener != null){
+                if (mListener != null) {
                     mListener.onShowInputMethod();
                 }
             }
@@ -138,7 +214,7 @@ public class EmotionKeyboard {
                     lockContentHeight();//显示软件盘时，锁定内容高度，防止跳闪。
                     hideEmotionLayout(true);//隐藏表情布局，显示软件盘
                     unlockContentHeightDelayed();//软件盘显示后，释放内容高度
-                    if(mListener != null){
+                    if (mListener != null) {
                         mListener.onShowInputMethod();
                     }
                 } else {
@@ -146,12 +222,12 @@ public class EmotionKeyboard {
                         lockContentHeight();
                         showEmotionLayout();
                         unlockContentHeightDelayed();
-                        if(mListener != null){
+                        if (mListener != null) {
                             mListener.onShowEmotionKeyboard();
                         }
                     } else {
                         showEmotionLayout();//两者都没显示，直接显示表情布局
-                        if(mListener != null){
+                        if (mListener != null) {
                             mListener.onShowEmotionKeyboard();
                         }
                     }
@@ -180,7 +256,7 @@ public class EmotionKeyboard {
                     hideSoftInput();//隐藏软键盘
                 }
                 showRecordLayout();
-                if(mListener != null){
+                if (mListener != null) {
                     mListener.onShowRecordLayout();
                 }
             }
@@ -309,90 +385,13 @@ public class EmotionKeyboard {
         return getSupportSoftInputHeight(mActivity) > KEYBOARD_HEIGHT_MIN;
     }
 
-
-    /**
-     * 获取软件盘的高度
-     *
-     * @return
-     */
-    public static int getSupportSoftInputHeight(Activity activity) {
-        Rect r = new Rect();
-        /**
-         * decorView是window中的最顶层view，可以从window中通过getDecorView获取到decorView。
-         * 通过decorView获取到程序显示的区域，包括标题栏，但不包括状态栏。
-         */
-        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
-        //获取屏幕的高度
-        int screenHeight = activity.getWindow().getDecorView().getRootView().getHeight();
-        if(Build.VERSION.SDK_INT >= 17){
-            DisplayMetrics metrics = new DisplayMetrics();
-            activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-            screenHeight = metrics.heightPixels;
-        }
-        //计算软件盘的高度
-        int softInputHeight = screenHeight - r.bottom;
-
-        /**
-         * 某些Android版本下，没有显示软键盘时减出来的高度总是144，而不是零，
-         * 这是因为高度是包括了虚拟按键栏的(例如华为系列)，所以在API Level高于20时，
-         * 我们需要减去底部虚拟按键栏的高度（如果有的话）
-         */
-        if (Build.VERSION.SDK_INT >= 17) {
-            // When SDK Level >= 20 (Android L), the softInputHeight will contain the height of softButtonsBar (if has)
-            int k = getSoftButtonsBarHeight(activity);
-            softInputHeight = softInputHeight - getSoftButtonsBarHeight(activity);
-        }
-
-        if (softInputHeight < 0) {
-            Log.w("", "EmotionKeyboard--Warning: value of softInputHeight is below zero!");
-        }
-        //存一份到本地
-        if (softInputHeight > KEYBOARD_HEIGHT_MIN) {
-            SharedPreferences sp = activity.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
-            sp.edit().putInt(SHARE_PREFERENCE_SOFT_INPUT_HEIGHT, softInputHeight).apply();
-        }
-        return softInputHeight;
-    }
-
-
-    /**
-     * 底部虚拟按键栏的高度
-     *
-     * @return
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private static int getSoftButtonsBarHeight(Activity activity) {
-        DisplayMetrics metrics = new DisplayMetrics();
-        //这个方法获取可能不是真实屏幕的高度
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int usableHeight = metrics.heightPixels;
-        //获取当前屏幕的真实高度
-        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-        int realHeight = metrics.heightPixels;
-        if (realHeight > usableHeight) {
-            return realHeight - usableHeight;
-        } else {
-            return 0;
-        }
-    }
-
-    /**
-     * 获取保存好的软键盘高度
-     *
-     * @return
-     */
-    public static int getKeyBoardHeight(Activity activity) {
-        SharedPreferences sp = activity.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        return sp.getInt(SHARE_PREFERENCE_SOFT_INPUT_HEIGHT, 0);
-    }
-
     /**
      * 获取软键盘高度，由于第一次直接弹出表情时会出现小问题，787是一个均值，作为临时解决方案
      *
      * @return
      */
     public int getKeyBoardHeight() {
-        return sp.getInt(SHARE_PREFERENCE_SOFT_INPUT_HEIGHT, 787);
+        return sp.getInt(SHARE_PREFERENCE_SOFT_INPUT_HEIGHT, keyboardDefaultHeight);
     }
 
 
@@ -406,7 +405,7 @@ public class EmotionKeyboard {
     /**
      * 隐藏软键盘和表情布局
      */
-    public void hideAllKeyboard(){
+    public void hideAllKeyboard() {
         if (mEmotionLayout.isShown()) {
             hideEmotionLayout(false);//隐藏表情布局
         }

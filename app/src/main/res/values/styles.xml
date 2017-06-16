@@ -1,11 +1,80 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!-- 未读的角标 -->
+    <style name="cornerSignView">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:background">@drawable/corner_sign_bg</item>
+    </style>
+    <!-- 进度条 -->
+    <style name="chatscene_item_progressbar">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
+    </style>
+
+    <style name="chatscene_item_time_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/chatscene_item_time_bg</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textColor">?attr_gray_999999</item>
+        <item name="android:textSize">@dimen/chatscene_item_text_middle</item>
+    </style>
+
+    <style name="chatscene_item_master_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/chatscene_item_mastertext_bg</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:textColor">?attr_white</item>
+        <item name="android:textSize">@dimen/chatscene_item_text_small</item>
+    </style>
+
+    <style name="chatscene_item_name_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr_black_gray_666666</item>
+        <item name="android:textSize">@dimen/chatscene_item_text_middle</item>
+    </style>
+
+    <style name="chatscene_item_action_textview" parent="chatscene_item_name_textview">
+    </style>
+    <style name="chatscene_item_record_time_textview" parent="chatscene_item_name_textview">
+    </style>
+
+
+
+
+
+    <style name="chatscene_item_content_text" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minWidth">@dimen/chatscene_item_content_text_min_width</item>
+        <item name="android:minHeight">@dimen/chatscene_item_content_min_height</item>
+        <item name="android:textColor">?attr_gray_999999</item>
+        <item name="android:textSize">@dimen/chatscene_item_text_big</item>
+    </style>
+
+
+
+
+
 
 </resources>

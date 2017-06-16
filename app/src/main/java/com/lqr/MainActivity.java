@@ -12,16 +12,28 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Bind(R.id.btnTest)
+    Button mBtnTest;
     @Bind(R.id.btnSimple)
     Button mBtnSimple;
     @Bind(R.id.btnWx)
     Button mBtnWx;
+    @Bind(R.id.btnChat)
+    Button mBtnChat;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        mBtnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mBtnSimple.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,5 +50,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        mBtnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChatSceneActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
