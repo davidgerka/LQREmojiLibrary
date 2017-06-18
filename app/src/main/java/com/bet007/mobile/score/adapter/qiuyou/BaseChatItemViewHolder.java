@@ -78,7 +78,7 @@ public class BaseChatItemViewHolder<MESSAGE extends IChatMessage>
                     break;
             }
         } else {
-            ivUnread.setVisibility(View.VISIBLE);
+            ivUnread.setVisibility(View.INVISIBLE);
         }
 
         civAvatar.setOnClickListener(new View.OnClickListener() {

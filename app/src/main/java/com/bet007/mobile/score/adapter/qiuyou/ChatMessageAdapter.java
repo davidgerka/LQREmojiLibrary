@@ -100,19 +100,8 @@ public class ChatMessageAdapter<MESSAGE extends IChatMessage> extends MultiListB
 
 
     @Override
-    public void onBindItemHolder(SuperViewHolder holder, int position) {
+    public void onBindItemHolder(RecyclerView.ViewHolder holder, int position) {
         final IChatMessage model = mDataList.get(position);
-
-//        TextView tvContent = holder.getView(R.id.tv_content_text);
-//        tvContent.setText(model.getContentText());
-//        holder.getView(R.id.content_layout_text).setVisibility(View.VISIBLE);
-//        holder.getView(R.id.content_layout_record).setVisibility(View.GONE);
-//        holder.getView(R.id.content_layout_pic).setVisibility(View.GONE);
-//
-////        tvContent.getLayoutParams().width = 510;
-//        tvContent.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
-//        tvContent.setMaxWidth(310);
-
 
         ((BaseChatMessageViewHolder) holder).mPosition = holder.getAdapterPosition();
         ((BaseChatMessageViewHolder) holder).mContext = this.mContext;
@@ -132,15 +121,11 @@ public class ChatMessageAdapter<MESSAGE extends IChatMessage> extends MultiListB
         this.mMsgResendListener = listener;
     }
 
-//    @Override
-//    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
-//        super.onViewDetachedFromWindow((SuperViewHolder)holder);
-//        Log.i("", "------------------------holder = "+holder);
-//        if(holder != null && holder instanceof SuperViewHolder){
-//            Log.i("", "------------------------true");
-//        }
-//        ViewHolderController.getInstance().remove(holder.getAdapterPosition());
-//    }
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        ViewHolderController.getInstance().remove(holder.getAdapterPosition());
+    }
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {

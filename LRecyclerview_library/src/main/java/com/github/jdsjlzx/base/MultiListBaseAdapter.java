@@ -16,7 +16,7 @@ import java.util.List;
  * @param <T>
  */
 
-public abstract class MultiListBaseAdapter<T> extends RecyclerView.Adapter<SuperViewHolder> {
+public abstract class MultiListBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     protected Context mContext;
     protected List<T> mDataList = new ArrayList<>();
     protected LayoutInflater mInflater;
@@ -29,7 +29,7 @@ public abstract class MultiListBaseAdapter<T> extends RecyclerView.Adapter<Super
     }
 
     @Override
-    public SuperViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(getLayoutId(viewType), parent, false);
         if (needModifyRootView) {
             modifyItemViewGroup((ViewGroup) itemView, mInflater, viewType);
@@ -38,13 +38,13 @@ public abstract class MultiListBaseAdapter<T> extends RecyclerView.Adapter<Super
     }
 
     @Override
-    public void onBindViewHolder(SuperViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         onBindItemHolder(holder, position);
     }
 
     //局部刷新关键：带payload的这个onBindViewHolder方法必须实现
     @Override
-    public void onBindViewHolder(SuperViewHolder holder, int position, List<Object> payloads) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
         } else {
@@ -55,9 +55,9 @@ public abstract class MultiListBaseAdapter<T> extends RecyclerView.Adapter<Super
 
     public abstract int getLayoutId(int viewType);
 
-    public abstract void onBindItemHolder(SuperViewHolder holder, int position);
+    public abstract void onBindItemHolder(RecyclerView.ViewHolder holder, int position);
 
-    public void onBindItemHolder(SuperViewHolder holder, int position, List<Object> payloads) {
+    public void onBindItemHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
 
     }
 

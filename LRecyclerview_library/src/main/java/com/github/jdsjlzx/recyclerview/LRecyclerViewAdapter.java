@@ -404,7 +404,6 @@ public class LRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
         mInnerAdapter.onViewDetachedFromWindow(holder);
-        Log.i("", "------------------------holder = "+holder);
     }
 
     @Override
