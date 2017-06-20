@@ -7,7 +7,7 @@
     <string name="record_free_cancel">松开手指，取消发送</string>
     <string name="chatscene_record_slideup_cancel">手指上滑，取消发送</string>
     <string name="record_remain_time">还可以说%s秒</string>
-    <string name="record_time_short">说话时间太短了。</string>
+    <string name="record_time_short">说话时间太短了</string>
     <string name="record_free_send">松开发送</string>
     <string name="record_audio_fail_no_sdcard">录音失败，请检查手机是否有存储卡。</string>
     <string name="record_audio_fail_nomore_volume">录音失败，手机存储空间不足。</string>

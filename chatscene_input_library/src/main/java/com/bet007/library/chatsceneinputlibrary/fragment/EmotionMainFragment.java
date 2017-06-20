@@ -264,7 +264,7 @@ public class EmotionMainFragment extends BaseFragment {
     /**
      * 按住说话，初始状态
      */
-    public void talkViewInit() {
+    public void recordViewInit() {
         recordTv.setText(R.string.record_press_start);
         recordTv.setBackgroundResource(R.drawable.chatscene_record_nor);
     }
@@ -272,7 +272,7 @@ public class EmotionMainFragment extends BaseFragment {
     /**
      * 按住说话，录音状态，松开结束
      */
-    public void talkViewFreeFinish() {
+    public void recordViewFreeFinish() {
         recordTv.setText(R.string.record_free_finish);
         recordTv.setBackgroundResource(R.drawable.chatscene_record_pre);
     }
@@ -280,7 +280,7 @@ public class EmotionMainFragment extends BaseFragment {
     /**
      * 按住说话，录音状态，松开取消
      */
-    public void talkViewFreeCancel() {
+    public void recordViewFreeCancel() {
         recordTv.setText(R.string.record_free_cancel);
         recordTv.setBackgroundResource(R.drawable.chatscene_record_pre);
     }
