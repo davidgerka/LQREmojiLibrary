@@ -2,10 +2,12 @@ package com.bet007.mobile.score.adapter.qiuyou;
 
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,6 +17,9 @@ import com.bet007.mobile.score.model.qiuyou.IChatMessage;
 import com.github.jdsjlzx.base.MultiListBaseAdapter;
 import com.github.jdsjlzx.base.SuperViewHolder;
 import com.lqr.R;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
 
 /**
  * 聊天消息列表adapter
@@ -26,8 +31,6 @@ public class ChatMessageAdapter<MESSAGE extends IChatMessage> extends MultiListB
 
     private Context mContext;
     private String mSenderId;
-//    private HoldersConfig mHolders;
-//    private OnLoadMoreListener mListener;
 
     private ImageLoader mImageLoader;
     private boolean mIsSelectedMode;
@@ -38,14 +41,17 @@ public class ChatMessageAdapter<MESSAGE extends IChatMessage> extends MultiListB
     private SelectionListener mSelectionListener;
     private int mSelectedItemCount;
     private RecyclerView.LayoutManager mLayoutManager;
-    //    private MessageListStyle mStyle;
-    private MediaPlayer mMediaPlayer = new MediaPlayer();
+    private RecordHolderController mRecordHolderController;
+    private WeakHandler mWeakHandler;
+    public static final int NOTIFY_LIST_HORN = 1000;    //刷新喇叭
 
     public ChatMessageAdapter(Context context, ViewClick viewClick, ImageLoader imageLoader) {
         super(context, true);
         mContext = context;
         mViewClick = viewClick;
         mImageLoader = imageLoader;
+        mRecordHolderController = RecordHolderController.getInstance(context);
+        mWeakHandler = new WeakHandler(this);
     }
 
     @Override
@@ -113,8 +119,46 @@ public class ChatMessageAdapter<MESSAGE extends IChatMessage> extends MultiListB
         ((BaseChatMessageViewHolder) holder).mMsgClickListener = this.mMsgClickListener;
         ((BaseChatMessageViewHolder) holder).mAvatarClickListener = this.mAvatarClickListener;
         ((BaseChatMessageViewHolder) holder).mMsgResendListener = this.mMsgResendListener;
-        ((BaseChatMessageViewHolder) holder).mMediaPlayer = this.mMediaPlayer;
+        ((BaseChatMessageViewHolder) holder).mWeakHandler = mWeakHandler;
         ((BaseViewHolder) holder).onBind(model);
+    }
+
+    /**
+     * 布局刷新关键，比如播放语音时，需要更新喇叭动画，这里要注意：animation需要用到局部刷新才能有动画
+     * @param holder
+     * @param position
+     * @param payloads
+     */
+    @Override
+    public void onBindItemHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
+        if(payloads.isEmpty()){
+            onBindItemHolder(holder, position);
+        }else {
+            final IChatMessage model = mDataList.get(position);
+            if(holder instanceof ChatItemRecordViewHolder){
+                ChatItemRecordViewHolder recordViewHolder = (ChatItemRecordViewHolder) holder;
+                recordViewHolder.setHornView(model);
+            }
+        }
+    }
+
+    public static class WeakHandler extends Handler {
+        WeakReference<ChatMessageAdapter> mWeakReference;
+
+        public WeakHandler(ChatMessageAdapter adapter){
+            mWeakReference = new WeakReference<>(adapter);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            ChatMessageAdapter adapter = mWeakReference.get();
+            if(adapter == null){
+                return;
+            }
+            if (msg.what == NOTIFY_LIST_HORN) {
+                adapter.notifyItemRangeChanged(msg.arg1 -1, 1, 1);
+            }
+        }
     }
 
     public void setMsgResendListener(OnMsgResendListener<MESSAGE> listener) {
@@ -124,13 +168,11 @@ public class ChatMessageAdapter<MESSAGE extends IChatMessage> extends MultiListB
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
-        ViewHolderController.getInstance().remove(holder.getAdapterPosition());
     }
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        ViewHolderController.getInstance().release();
     }
 
     public interface SelectionListener {

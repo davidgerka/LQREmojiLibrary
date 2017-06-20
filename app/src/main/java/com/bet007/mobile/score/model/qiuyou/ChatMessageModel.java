@@ -48,7 +48,7 @@ public class ChatMessageModel extends BaseModelInfo implements IChatMessage, Par
     private int thumbHeight;//缩略图高
 
     public ChatMessageModel() {
-
+        messageId = System.currentTimeMillis();
     }
 
     public ChatMessageModel(boolean isFrom) {

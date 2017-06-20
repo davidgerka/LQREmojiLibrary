@@ -37,7 +37,7 @@ public class EmotionMainFragment extends BaseFragment {
     public static final String BIND_TO_EDITTEXT = "bind_to_edittext";
     //是否隐藏bar上的编辑框和发送按钮
     public static final String HIDE_BAR_EDITTEXT_AND_BTN = "hide bar's editText and btn";
-    private static final int CHAT_TEXT_MAX = 60;
+    private static final int CHAT_TEXT_MAX = 1860;  //限制最大输入字数
     public LinearLayout recordLayout; // 按住说话布局
     public RelativeLayout wordLayout; // 文字输入布局
     public EditText wordInputEt; // 文字输入

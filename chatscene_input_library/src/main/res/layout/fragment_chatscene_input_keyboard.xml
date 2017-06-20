@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <include layout="@layout/chatscene_select_type_layout"
-        android:id="@+id/hs_select_type"/>
+    <include
+        android:id="@+id/hs_select_type"
+        layout="@layout/chatscene_select_type_layout" />
 
     <LinearLayout
         android:id="@+id/ll_emotion_layout"

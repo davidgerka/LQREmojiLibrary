@@ -25,6 +25,7 @@ import com.bet007.library.chatsceneinputlibrary.listener.IEmotionSelectedListene
 import com.bet007.library.chatsceneinputlibrary.listener.IImageLoader;
 import com.bet007.library.chatsceneinputlibrary.utils.LQREmotionKit;
 import com.bet007.mobile.score.adapter.qiuyou.ChatMessageAdapter;
+import com.bet007.mobile.score.adapter.qiuyou.RecordHolderController;
 import com.bet007.mobile.score.common.SoundRecorder;
 import com.bet007.mobile.score.common.ToastUtil;
 import com.bet007.mobile.score.interfaces.ImageLoader;
@@ -36,8 +37,6 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -99,6 +98,7 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
         setContentView(R.layout.activity_chat_scene);
         ButterKnife.bind(this);
         mSensor = new SoundRecorder();
+        RecordHolderController.getInstance(this);
         LQREmotionKit.init(this, new IImageLoader() {
             @Override
             public void displayImage(Context context, String path, ImageView imageView) {
@@ -106,6 +106,8 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
             }
         });
 
+
+        mWebChatManager.generateDataList();
         findViews();
         initEmotionMainFragment();
 
@@ -293,7 +295,7 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
         }
     }
 
-    private static class WeakHandler extends Handler {
+    public static class WeakHandler extends Handler {
         WeakReference<ChatSceneActivity> mWeakReference;
 
         public WeakHandler(ChatSceneActivity chatActivity){
@@ -305,6 +307,16 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
             ChatSceneActivity chatSceneActivity = mWeakReference.get();
             if(chatSceneActivity == null){
                 return;
+            }
+            if (msg.what == RECORD_VOICE_TIPS) {
+                if (msg.arg1 == 0) {
+                    chatSceneActivity.recordTextView.setText(R.string.chatscene_record_slideup_cancel);
+                } else {
+                    String string = String.format(chatSceneActivity.getString(R.string.record_remain_time), String.valueOf(msg.arg2));
+                    chatSceneActivity.recordRemainTextView.setText(string);
+                    chatSceneActivity.recordRemainTextView.setVisibility(View.VISIBLE);
+                    chatSceneActivity.recordTextView.setVisibility(View.INVISIBLE);
+                }
             }
         }
     }
@@ -354,7 +366,9 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
 
     @Override
     public void onSendTextMsg(String content) {
-
+        mWebChatManager.addTextToList(content);
+        mDataAdapter.notifyDataSetChanged();
+        adjustKeyboardForSmooth();
     }
 
     @Override
@@ -395,10 +409,10 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
 
             SoundRecorder.makeFolderWithName(SoundRecorder.VOICE_FOLDER); // 创建录音文件夹
             talkViewFreeFinish();
-            recordimageTipView.setBackgroundResource(R.drawable.record_free_cancel);
-            recordTextView.setText(R.string.record_slideup_cancel);
+            recordimageTipView.setBackgroundResource(R.drawable.chatscene_record_free_cancel);
+            recordTextView.setText(R.string.chatscene_record_slideup_cancel);
             recordTextView.setBackgroundColor(Color.TRANSPARENT);
-            recordVolumeView.setBackgroundResource(R.drawable.record_volume0);
+            recordVolumeView.setBackgroundResource(R.drawable.chatscene_mic_0);
             recordStatusLayout.setVisibility(View.INVISIBLE);
             recordLoadLayout.setVisibility(View.VISIBLE);
             recordimageTipView.setVisibility(View.INVISIBLE);
@@ -468,7 +482,7 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
                     if (time < SoundRecorder.RECORD_TIME_MIN) { // 时间太短
                         isShosrt = true;
                         recordVolumeView.setVisibility(View.INVISIBLE);
-                        recordimageTipView.setBackgroundResource(R.drawable.record_tooshort);
+                        recordimageTipView.setBackgroundResource(R.drawable.chatscene_record_tooshort);
                         recordimageTipView.setVisibility(View.VISIBLE);
                         recordTextView.setText(R.string.record_time_short);
                         recordTextView.setBackgroundColor(Color.TRANSPARENT);
@@ -520,7 +534,7 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
                         String string = String.format(getString(R.string.record_remain_time), String.valueOf(k));
                         recordRemainTextView.setText(string);
                     } else {
-                        recordTextView.setText(R.string.record_slideup_cancel);
+                        recordTextView.setText(R.string.chatscene_record_slideup_cancel);
                     }
                     recordTextView.setBackgroundColor(Color.TRANSPARENT);
                     talkViewFreeFinish();
@@ -644,7 +658,6 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
         if (mSensor != null) {
             mSensor.stop();
         }
-//		mWeakHandler.postDelayed(r, delayMillis)
         SoundRecorder.muteAudioFocus(mApplication, false);
     }
 
@@ -680,22 +693,22 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
 
         switch ((int) signalEMA) {
             case 1:
-                recordVolumeView.setImageResource(R.drawable.record_volume1);
+                recordVolumeView.setImageResource(R.drawable.chatscene_mic_0);
                 break;
             case 2:
-                recordVolumeView.setImageResource(R.drawable.record_volume2);
+                recordVolumeView.setImageResource(R.drawable.chatscene_mic_1);
                 break;
             case 3:
-                recordVolumeView.setImageResource(R.drawable.record_volume3);
+                recordVolumeView.setImageResource(R.drawable.chatscene_mic_2);
                 break;
             case 4:
-                recordVolumeView.setImageResource(R.drawable.record_volume4);
+                recordVolumeView.setImageResource(R.drawable.chatscene_mic_3);
                 break;
             case 5:
-                recordVolumeView.setImageResource(R.drawable.record_volume5);
+                recordVolumeView.setImageResource(R.drawable.chatscene_mic_4);
                 break;
             default:
-                recordVolumeView.setImageResource(R.drawable.record_volume0);
+                recordVolumeView.setImageResource(R.drawable.chatscene_mic_5);
                 break;
         }
         return true;
@@ -718,7 +731,11 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
      */
     private void sendVoiceMsg(int voiceTime) {
         String voicePath = SoundRecorder.getVoicePathWithName(voiceName);
+        mWebChatManager.addRecordToList(voicePath, voiceTime);
+        mDataAdapter.notifyDataSetChanged();
+        adjustKeyboardForSmooth();
     }
+
     
     @Override
     public void onPause() {
@@ -738,5 +755,6 @@ public class ChatSceneActivity extends BaseActivity implements IEmotionSelectedL
         if (mSensor != null) {
             mSensor.destroy();
         }
+        RecordHolderController.getInstance(getApplicationContext()).destroy();
     }
 }

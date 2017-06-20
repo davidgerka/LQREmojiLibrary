@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_layout_text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -9,6 +10,6 @@
     <TextView
         android:id="@+id/tv_content_text"
         style="@style/chatscene_item_content_text"
-        android:text="1234234近日" />
+        tools:text="托雷斯" />
 
 </LinearLayout>

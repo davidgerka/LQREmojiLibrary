@@ -26,14 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/number0" />
+                android:background="@drawable/chatscene_mic_0" />
 
             <ImageView
                 android:id="@+id/record_imagetip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/record_tooshort" />
+                android:background="@drawable/chatscene_record_tooshort" />
         </RelativeLayout>
 
         <FrameLayout
@@ -47,7 +47,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:gravity="center"
-                android:text="@string/record_slideup_cancel"
+                android:text="@string/chatscene_record_slideup_cancel"
                 android:textColor="#ffffff"
                 android:textSize="13.0dip" />
 

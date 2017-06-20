@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/layout_record"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="@dimen/btn_height_small"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center_vertical"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:minHeight="36dp"
+        android:minHeight="@dimen/btn_height_small"
         android:splitMotionEvents="false"
         android:visibility="visible">
 
@@ -53,6 +53,7 @@
             android:textColor="@color/btn_chat_send_textcolor"
             android:visibility="invisible" />
 
+        <!--这里要注意gravity要设为bottom，不然输入文字后，继续输入表情时，文字会上下移位-->
         <EditText
             android:id="@+id/et_input"
             android:layout_width="match_parent"
@@ -63,6 +64,7 @@
             android:cursorVisible="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:gravity="bottom"
             android:maxLines="5"
             android:minHeight="@dimen/btn_height_small"
             android:padding="@dimen/padding_msmall"

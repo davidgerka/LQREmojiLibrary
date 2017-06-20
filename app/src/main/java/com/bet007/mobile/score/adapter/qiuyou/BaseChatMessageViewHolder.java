@@ -2,10 +2,14 @@ package com.bet007.mobile.score.adapter.qiuyou;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.view.View;
 
 import com.bet007.mobile.score.interfaces.ImageLoader;
 import com.bet007.mobile.score.model.qiuyou.IChatMessage;
+import com.lqr.ChatSceneActivity;
+
+import java.lang.ref.WeakReference;
 
 /**
  * 聊天消息基类ViewHolle
@@ -22,7 +26,7 @@ public abstract class BaseChatMessageViewHolder<MESSAGE extends IChatMessage> ex
     protected ChatMessageAdapter.OnMsgClickListener<MESSAGE> mMsgClickListener;
     protected ChatMessageAdapter.OnAvatarClickListener<MESSAGE> mAvatarClickListener;
     protected ChatMessageAdapter.OnMsgResendListener<MESSAGE> mMsgResendListener;
-    protected MediaPlayer mMediaPlayer;
+    protected Handler mWeakHandler;
     public BaseChatMessageViewHolder(View itemView) {
         super(itemView);
     }

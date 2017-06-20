@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.StatFs;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
@@ -257,5 +258,40 @@ public class SoundRecorder {
 	public synchronized static String getMeidiaNo() {
 		String result = System.currentTimeMillis() + "";
 		return result;
+	}
+
+	/**
+	 * 根据声音文件的url得到声音本地路径
+	 *
+	 * @param voiceUrl
+	 *            声音文件url
+	 * @return
+	 */
+	public static String createVoicePathWithUrl(String voiceUrl) {
+		String filename = getLastStringWithSplit("/", voiceUrl);
+		return getFolderWithName(VOICE_FOLDER) + filename;
+	}
+
+	/**
+	 * 获取字符串中分隔符后面的一段字符串
+	 *
+	 * @param string
+	 * @return
+	 */
+	public static String getLastStringWithSplit(String split, String string) {
+		if (TextUtils.isEmpty(string)) {
+			return "";
+		}
+		if (TextUtils.isEmpty(split)) {
+			return string;
+		}
+		int k = string.lastIndexOf(split);
+		try {
+			String result = string.substring(k + 1);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return string;
 	}
 }

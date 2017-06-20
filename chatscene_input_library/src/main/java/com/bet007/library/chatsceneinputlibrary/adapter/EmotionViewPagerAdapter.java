@@ -36,6 +36,7 @@ import java.util.List;
 
 public class EmotionViewPagerAdapter extends PagerAdapter {
     private static final String TAG = EmotionViewPagerAdapter.class.getSimpleName();
+    public static final String DELETE_KEY = "/DEL"; //删除键
 
     private static final int EMOTION_MARGIN_PADDING = 1;     //表情两边的padding，单位为dp，计算时要乘以屏幕密度
     private static final int EMOTION_MARGIN_LANDSCAPE = 6;   //表情左右间隔，单位为dp，计算时要乘以屏幕密度
@@ -61,9 +62,9 @@ public class EmotionViewPagerAdapter extends PagerAdapter {
             int count = EmojiManager.getDisplayCount();
             if (position == EmotiomFragment.EMOJI_PER_PAGE || index >= count) {
                 if (listener != null) {
-                    listener.onEmojiSelected("/DEL");
+                    listener.onEmojiSelected(DELETE_KEY);
                 }
-                onEmojiSelected("/DEL");
+                onEmojiSelected(DELETE_KEY);
             } else {
                 String text = EmojiManager.getDisplayText((int) id);
                 if (!TextUtils.isEmpty(text)) {
@@ -185,7 +186,7 @@ public class EmotionViewPagerAdapter extends PagerAdapter {
         if (mMessageEditText == null)
             return;
         Editable editable = mMessageEditText.getText();
-        if (key.equals("/DEL")) {
+        if (key.equals(DELETE_KEY)) {
             mMessageEditText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
         } else {
             int start = mMessageEditText.getSelectionStart();

@@ -998,6 +998,14 @@ public class LRecyclerView extends RecyclerView {
             mWrapAdapter.notifyItemRangeChanged(positionStart + mWrapAdapter.getHeaderViewsCount() + 1, itemCount);
         }
 
+        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+            if(payload == null){
+                onItemRangeChanged(positionStart, itemCount);
+            }else {
+                mWrapAdapter.notifyItemRangeChanged(positionStart + mWrapAdapter.getHeaderViewsCount() + 1, itemCount, payload);
+            }
+        }
+
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             mWrapAdapter.notifyItemRangeInserted(positionStart + mWrapAdapter.getHeaderViewsCount() + 1, itemCount);

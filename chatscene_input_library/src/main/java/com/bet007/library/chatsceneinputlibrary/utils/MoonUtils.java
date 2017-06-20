@@ -114,6 +114,14 @@ public class MoonUtils {
      * 识别表情
      */
     public static void identifyFaceExpression(Context context,
+                                              View textView, String value) {
+        identifyFaceExpression(context, textView, value, ImageSpan.ALIGN_BOTTOM, DEF_SCALE);
+    }
+
+    /**
+     * 识别表情
+     */
+    public static void identifyFaceExpression(Context context,
                                               View textView, String value, int align) {
         identifyFaceExpression(context, textView, value, align, DEF_SCALE);
     }
@@ -164,6 +172,33 @@ public class MoonUtils {
                 editable.setSpan(span, from, to, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
+    }
+
+    /**
+     * 替换字符串中的表情
+     * @param context
+     * @param text
+     * @param start
+     * @param count
+     * @return
+     */
+    public static SpannableString replaceEmoticons(Context context, String text, int start, int count) {
+        if (TextUtils.isEmpty(text) || count <= 0 || text.length() < start + count)
+            return new SpannableString("");
+
+        SpannableString spannableString = new SpannableString(text);
+        Matcher matcher = EmojiManager.getPattern().matcher(spannableString);
+        while (matcher.find()) {
+            int from = start + matcher.start();
+            int to = start + matcher.end();
+            String emot = spannableString.subSequence(from, to).toString();
+            Drawable d = getEmotDrawable(context, emot, SMALL_SCALE);
+            if (d != null) {
+                ImageSpan imageSpan = new ImageSpan(d, ImageSpan.ALIGN_BOTTOM);
+                spannableString.setSpan(imageSpan, from, to, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        return spannableString;
     }
 
     private static Drawable getEmotDrawable(Context context, String text, float scale) {

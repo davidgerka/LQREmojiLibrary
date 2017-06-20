@@ -16,8 +16,8 @@
     </style>
     <!-- 进度条 -->
     <style name="chatscene_item_progressbar">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_width">@dimen/chatscene_item_progressbar_width</item>
+        <item name="android:layout_height">@dimen/chatscene_item_progressbar_width</item>
         <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
     </style>
 
@@ -57,15 +57,11 @@
     <style name="chatscene_item_record_time_textview" parent="chatscene_item_name_textview">
     </style>
 
-
-
-
-
     <style name="chatscene_item_content_text" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">5dp</item>
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:gravity">bottom</item>
         <item name="android:minWidth">@dimen/chatscene_item_content_text_min_width</item>
         <item name="android:minHeight">@dimen/chatscene_item_content_min_height</item>
         <item name="android:textColor">?attr_gray_999999</item>

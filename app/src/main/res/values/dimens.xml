@@ -30,6 +30,7 @@
     <dimen name="chatscene_item_unread_margin_bg">4dp</dimen>
     <dimen name="chatscene_item_fail_margin_bg">4dp</dimen>
     <dimen name="chatscene_item_progressbar_margin_bg">4dp</dimen>
+    <dimen name="chatscene_item_progressbar_width">20dp</dimen>
     <dimen name="chatscene_item_pic_min_width">80dp</dimen>
     <dimen name="chatscene_item_pic_min_height">100dp</dimen>
     <dimen name="chatscene_item_pic_max_width">180dp</dimen>

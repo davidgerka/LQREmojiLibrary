@@ -13,7 +13,7 @@ public class WebChatManager {
 
     public List<ChatMessageModel> chatMessageModelList = new ArrayList<>();
 
-    public List<ChatMessageModel> getList() {
+    public void generateDataList(){
         chatMessageModelList.clear();
         int size = 200;
         ChatMessageModel chatMessageModel = ChatMessageModel.getTipsMsg();;
@@ -49,9 +49,54 @@ public class WebChatManager {
                     chatMessageModel = ChatMessageModel.getToPicMsg();
                     break;
             }
+            chatMessageModel.setMessageId(i);
             chatMessageModelList.add(chatMessageModel);
         }
+
+        long id = System.currentTimeMillis();
+        chatMessageModel = ChatMessageModel.getToRecordMsg();
+        chatMessageModel.setDuration(6);
+        chatMessageModel.setMessageId(id);
+        chatMessageModel.setContentText("/storage/emulated/0/liveScore/voice/kaka-gerrard-1497866081032.amr");
+        chatMessageModelList.add(chatMessageModel);
+        chatMessageModel = ChatMessageModel.getFromRecordMsg();
+        chatMessageModel.setDuration(3);
+        chatMessageModel.setMessageId(id + 1);
+        chatMessageModel.setContentText("/storage/emulated/0/liveScore/voice/kaka-gerrard-1497866090787.amr");
+        chatMessageModelList.add(chatMessageModel);
+        chatMessageModel = ChatMessageModel.getToRecordMsg();
+        chatMessageModel.setDuration(8);
+        chatMessageModel.setMessageId(id + 2);
+        chatMessageModel.setContentText("/storage/emulated/0/liveScore/voice/kaka-gerrard-1497866095762.amr");
+        chatMessageModelList.add(chatMessageModel);
+
+    }
+
+    public List<ChatMessageModel> getList() {
         return chatMessageModelList;
+    }
+
+    boolean from = true;
+
+    public void addRecordToList(String recordPath, int duration){
+        ChatMessageModel model = ChatMessageModel.getToRecordMsg();
+        from = !from;
+        if(from){
+            model = ChatMessageModel.getFromRecordMsg();
+        }
+        model.setDuration(duration);
+        model.setContentText(recordPath);
+        chatMessageModelList.add(model);
+    }
+
+    public void addTextToList(String text){
+        ChatMessageModel model = ChatMessageModel.getToTextMsg();
+        from = !from;
+        if(from){
+            model = ChatMessageModel.getFromTextMsg();
+        }
+        model.setContentText(text);
+        chatMessageModelList.add(model);
     }
 
 }
